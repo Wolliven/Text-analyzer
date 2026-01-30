@@ -1,3 +1,5 @@
+import sys
+
 def count_words(text):
     counter = 0
     for i in range(len(text.split())):
@@ -16,11 +18,18 @@ def most_frequent_word(text):
     most_frequent = max(frequency, key=frequency.get)
     return most_frequent, frequency[most_frequent]
 
-def main():
-    with open('text.txt', 'r', encoding='utf-8') as file:
-        content = file.read()
+def main(text):
+    with open(text, 'r', encoding='utf-8') as f:
+        content = f.read()
         print("Words in text: " + str(count_words(content)))
         print("Most frequent word: " + str(most_frequent_word(content)))
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 2:
+        text = sys.argv[1]
+    elif len(sys.argv) > 2:
+        print("Program usage: python main.py [filename]")
+        sys.exit(1)
+    else:
+        text = 'text.txt'
+    main(text)
