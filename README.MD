@@ -1,0 +1,1 @@
+This program reads different files adn gives basic statistics about them.
