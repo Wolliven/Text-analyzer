@@ -1,10 +1,7 @@
 import sys
 
 def count_words(text):
-    counter = 0
-    for i in range(len(text.split())):
-        counter += 1
-    return counter
+    return len(text.split())
 
 def most_frequent_word(text):
     words = text.split()
@@ -15,14 +12,21 @@ def most_frequent_word(text):
             frequency[word] += 1
         else:
             frequency[word] = 1
-    most_frequent = max(frequency, key=frequency.get)
-    return most_frequent, frequency[most_frequent]
+    if frequency:
+        most_frequent = max(frequency, key=frequency.get)
+        return most_frequent, frequency[most_frequent]
+    else:
+        return None, 0
 
 def main(text):
-    with open(text, 'r', encoding='utf-8') as f:
-        content = f.read()
-        print("Words in text: " + str(count_words(content)))
-        print("Most frequent word: " + str(most_frequent_word(content)))
+    try:
+        with open(text, 'r', encoding='utf-8') as f:
+            content = f.read()
+            print("Words in text: " + str(count_words(content)))
+            print("Most frequent word: " + str(most_frequent_word(content)))
+    except FileNotFoundError:
+        print(f"File '{text}' not found.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
