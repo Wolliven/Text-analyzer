@@ -38,14 +38,15 @@ def main(path):
                     for word, freq in most_frequent
                 ]
             }
-            #Create the Json file
-            with open('result.json', 'w', encoding='utf-8') as f:
-                json.dump(result, f, indent=4, ensure_ascii=False)
-            
-            print("Words in text: " + str(counted_words))
-            print("Most frequent words: ")
-            for word, freq in most_frequent:
-                print(f"'{word}' appears {freq} times")
+            #Create the Json file based on the name provided by the user or default to result.json
+            if 'json_file' in globals():
+                with open(json_file, 'w', encoding='utf-8') as f:
+                    json.dump(result, f, indent=4, ensure_ascii=False)
+            else:
+                print("Words in text: " + str(counted_words))
+                print("Most frequent words: ")
+                for word, freq in most_frequent:
+                    print(f"'{word}' appears {freq} times")
     except FileNotFoundError:
         print(f"File '{text}' not found.")
         sys.exit(1)
@@ -53,8 +54,11 @@ def main(path):
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         text = sys.argv[1]
-    elif len(sys.argv) > 2:
-        print("Program usage: python main.py [filename]")
+    elif len(sys.argv) == 3:
+        text = sys.argv[1]
+        json_file = sys.argv[2]
+    elif len(sys.argv) > 3:
+        print("Program usage: python main.py [filename] [JSON file name (optional)]")
         sys.exit(1)
     else:
         text = 'text.txt'

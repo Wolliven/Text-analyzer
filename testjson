@@ -1,0 +1,13 @@
+{
+    "total_words": 7,
+    "most_frequent": [
+        {
+            "word": "hello",
+            "count": 4
+        },
+        {
+            "word": "hola",
+            "count": 3
+        }
+    ]
+}
