@@ -40,6 +40,8 @@ def main(path, json_file=None):
             }
             #Create the Json file based on the name provided by the user or default to result.json
             if json_file:
+                if not json_file.endswith('.json'):
+                    json_file += '.json'
                 with open(json_file, 'w', encoding='utf-8') as f:
                     json.dump(result, f, indent=4, ensure_ascii=False)
             else:
