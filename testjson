@@ -1,13 +1,17 @@
 {
-    "total_words": 7,
+    "total_words": 26,
     "most_frequent": [
         {
-            "word": "hello",
-            "count": 4
+            "word": "un",
+            "count": 2
+        },
+        {
+            "word": "palabras",
+            "count": 2
         },
         {
             "word": "hola",
-            "count": 3
+            "count": 1
         }
     ]
 }

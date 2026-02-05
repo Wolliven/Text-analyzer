@@ -22,7 +22,7 @@ def most_frequent_words(words):
     top_words = [(word, frequency[word]) for word in sorted_freq[:3]]
     return top_words
 
-def main(path):
+def main(path, json_file=None):
     try:
         with open(path, 'r', encoding='utf-8') as f:
             content = normalize(f.read())
@@ -39,7 +39,7 @@ def main(path):
                 ]
             }
             #Create the Json file based on the name provided by the user or default to result.json
-            if 'json_file' in globals():
+            if json_file:
                 with open(json_file, 'w', encoding='utf-8') as f:
                     json.dump(result, f, indent=4, ensure_ascii=False)
             else:
@@ -48,18 +48,17 @@ def main(path):
                 for word, freq in most_frequent:
                     print(f"'{word}' appears {freq} times")
     except FileNotFoundError:
-        print(f"File '{text}' not found.")
+        print(f"File '{path}' not found.")
         sys.exit(1)
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         text = sys.argv[1]
+        main(text)
     elif len(sys.argv) == 3:
         text = sys.argv[1]
         json_file = sys.argv[2]
-    elif len(sys.argv) > 3:
+        main(text, json_file)
+    else:
         print("Program usage: python main.py [filename] [JSON file name (optional)]")
         sys.exit(1)
-    else:
-        text = 'text.txt'
-    main(text)
